@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - hibernews@localhost" uuid="78ad7e45-223e-40c6-bd1d-7d3df227cee0">
+    <database-info product="MySQL" version="5.5.39" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="hibernews"/>
+    <table name="t_category" schema="" catalog="hibernews" type="TABLE">
+      <column name="categoryId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="F_CATEGORY_NAME" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="categoryId"/>
+      <exported-key name="FK_dkvvjkv3crgot8q6lak1be8ut" table="t_news" schema="" catalog="hibernews" columns="F_CATEGORY_ID"/>
+    </table>
+    <table name="t_comment" schema="" catalog="hibernews" type="TABLE">
+      <column name="commentId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="F_COMMENT" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="F_USER_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="F_NEWS_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="commentId"/>
+      <foreign-key name="FK_ax62dlcwv00motqhs28m167dn" columns="F_USER_ID" ref-table="t_user" ref-schema="" ref-catalog="hibernews" ref-columns="userId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_lw6nlnu6dn8locu3l67cirns7" columns="F_NEWS_ID" ref-table="t_news" ref-schema="" ref-catalog="hibernews" ref-columns="newsId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_ax62dlcwv00motqhs28m167dn" unique="false" columns="F_USER_ID"/>
+      <index name="FK_lw6nlnu6dn8locu3l67cirns7" unique="false" columns="F_NEWS_ID"/>
+    </table>
+    <table name="t_news" schema="" catalog="hibernews" type="TABLE">
+      <column name="newsId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="F_TITLE" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="F_ANNOTATION" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="F_DOCUMENT" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="F_CATEGORY_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="F_USER_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="newsId"/>
+      <foreign-key name="FK_25kr1k263wt904rmqu5ny3lrb" columns="F_USER_ID" ref-table="t_user" ref-schema="" ref-catalog="hibernews" ref-columns="userId" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="FK_dkvvjkv3crgot8q6lak1be8ut" columns="F_CATEGORY_ID" ref-table="t_category" ref-schema="" ref-catalog="hibernews" ref-columns="categoryId" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="FK_lw6nlnu6dn8locu3l67cirns7" table="t_comment" schema="" catalog="hibernews" columns="F_NEWS_ID"/>
+      <exported-key name="FK_6fbg9fyqmy29snw5vnb2gsluw" table="t_news_detail" schema="" catalog="hibernews" columns="newsId"/>
+      <exported-key name="FK_27uev7e28hse9r4jgsiy2fpnr" table="t_news_tag" schema="" catalog="hibernews" columns="F_NEWS_ID"/>
+      <index name="FK_25kr1k263wt904rmqu5ny3lrb" unique="false" columns="F_USER_ID"/>
+      <index name="FK_dkvvjkv3crgot8q6lak1be8ut" unique="false" columns="F_CATEGORY_ID"/>
+    </table>
+    <table name="t_news_detail" schema="" catalog="hibernews" type="TABLE">
+      <column name="newsId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="F_AUTHOR" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="F_AGENCY" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="F_DRELEASE" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="newsId"/>
+      <foreign-key name="FK_6fbg9fyqmy29snw5vnb2gsluw" columns="newsId" ref-table="t_news" ref-schema="" ref-catalog="hibernews" ref-columns="newsId" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="t_news_tag" schema="" catalog="hibernews" type="TABLE">
+      <column name="F_NEWS_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="F_TAG_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="F_NEWS_ID,F_TAG_ID"/>
+      <foreign-key name="FK_27uev7e28hse9r4jgsiy2fpnr" columns="F_NEWS_ID" ref-table="t_news" ref-schema="" ref-catalog="hibernews" ref-columns="newsId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_95w9ots7rp5etrv6c011xwt0p" columns="F_TAG_ID" ref-table="t_tag" ref-schema="" ref-catalog="hibernews" ref-columns="tagId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_95w9ots7rp5etrv6c011xwt0p" unique="false" columns="F_TAG_ID"/>
+    </table>
+    <table name="t_role" schema="" catalog="hibernews" type="TABLE">
+      <column name="roleId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="F_ROLE" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="F_NAME_ROLE" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="roleId"/>
+      <exported-key name="FK_ldlmkpj76aiwprpgq2bvxwdx1" table="t_user" schema="" catalog="hibernews" columns="F_ROLE_ID"/>
+    </table>
+    <table name="t_tag" schema="" catalog="hibernews" type="TABLE">
+      <column name="tagId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="F_TAG_NAME" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="tagId"/>
+      <exported-key name="FK_95w9ots7rp5etrv6c011xwt0p" table="t_news_tag" schema="" catalog="hibernews" columns="F_TAG_ID"/>
+    </table>
+    <table name="t_user" schema="" catalog="hibernews" type="TABLE">
+      <column name="userId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="F_NAME" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="F_SUR_NAME" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="F_EMAIL" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="F_PASSWORD" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="F_ROLE_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="userId"/>
+      <foreign-key name="FK_ldlmkpj76aiwprpgq2bvxwdx1" columns="F_ROLE_ID" ref-table="t_role" ref-schema="" ref-catalog="hibernews" ref-columns="roleId" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="FK_ax62dlcwv00motqhs28m167dn" table="t_comment" schema="" catalog="hibernews" columns="F_USER_ID"/>
+      <exported-key name="FK_25kr1k263wt904rmqu5ny3lrb" table="t_news" schema="" catalog="hibernews" columns="F_USER_ID"/>
+      <index name="FK_ldlmkpj76aiwprpgq2bvxwdx1" unique="false" columns="F_ROLE_ID"/>
+    </table>
+  </data-source>
+</component>

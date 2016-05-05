@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="default" template="/WEB-INF/view/layouts/default.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" value="/WEB-INF/view/common/header.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/view/common/footer.jsp"/>
+    </definition>
+    <definition name="news/view" extends="default">
+        <put-attribute name="title" value="News"/>
+        <put-attribute name="body" value="/WEB-INF/view/news/main.jsp"/>
+    </definition>
+    <definition name="news/one" extends="default">
+        <put-attribute name="title" value="OneNews"/>
+        <put-attribute name="body" value="/WEB-INF/view/news/shownews.jsp"/>
+    </definition>
+    <definition name="news/edit" extends="default">
+        <put-attribute name="title" value="EditNews"/>
+        <put-attribute name="body" value="/WEB-INF/view/news/editnews.jsp"/>
+    </definition>
+    <definition name="news/add" extends="default">
+        <put-attribute name="title" value="AddNews"/>
+        <put-attribute name="body" value="/WEB-INF/view/news/editnews.jsp"/>
+    </definition>
+    <definition name="loginDir/loginPage" extends="default">
+        <put-attribute name="title" value="Authentification"/>
+        <put-attribute name="body" value="/WEB-INF/view/login/login.jsp"/>
+    </definition>
+</tiles-definitions>
